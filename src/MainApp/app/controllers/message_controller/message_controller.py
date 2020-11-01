@@ -19,7 +19,8 @@ class MessageController(AioHTTPRestEndpoint):
         if request.body_exists and request.query is not None:
             body = await request.json()
             message = body['message']
-            data = await self.recognizer.recognize(message)
+            recognized = await self.recognizer.recognize(message)
+            data = {"message": dumps(recognized)}
             if data is not None:
                 status = 201
             else:

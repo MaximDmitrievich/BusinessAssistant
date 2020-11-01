@@ -1,6 +1,5 @@
 aiohttp
 aiohttp_rest_api
 asyncio
-bertopic
 natasha
 stop_words

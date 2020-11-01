@@ -2,7 +2,6 @@ from aiohttp import ClientSession
 from aiohttp.client_reqrep import ClientResponse
 from json import dumps
 
-
 class IntentService:
     def __init__(self, client_session: ClientSession, url):
         self.client_session = client_session
@@ -15,4 +14,4 @@ class IntentService:
                 response: ClientResponse = await session.post(url=self.url, json={ "text": str(text) }, headers=headers)
         else:
             response: ClientResponse = await self.client_session.post(url=self.url, json={ "text": str(text) }, headers=headers)
-        return response.json()
+        return await response.json()

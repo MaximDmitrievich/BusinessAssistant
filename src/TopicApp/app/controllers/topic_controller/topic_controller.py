@@ -43,11 +43,14 @@ class TopicController(AioHTTPRestEndpoint):
             body = await request.json()
             text = body['text']
             trans = []
+            index_topic = None
             try:
                 for line in text.split('.'):
                     trans.append(clearing(line+'.'))
                 index_topic = self.model.transform(trans)
-            data = index_topic
+                data = index_topic
+            except Exception as e:
+                data = ""
             if data is not None:
                 status = 201
             else:

@@ -4,7 +4,10 @@ from aiohttp.web import Application, AppRunner, TCPSite
 from asyncio import get_event_loop, ensure_future
 from logging import INFO, getLogger
 
-
+from services.intent_service import IntentService
+from services.ner_service import NERService
+from services.topic_service import TopicService
+from controllers.recognize_controller import ResolverController
 from middlewares.exception_handler_middleware import ExceptionHandlerMiddleware
 
 if __name__ == "__main__":
@@ -12,11 +15,12 @@ if __name__ == "__main__":
     logger.setLevel(INFO)
 
     middleware = ExceptionHandlerMiddleware(logger)
-    intents = IntentService(None, "http://{}:{}/intent".format(environ["INTENT_PORT"], environ["INTENT_PORT"]))
-    ner = NERSerivce(None, "http://{}:{}/intent".format(environ["NER_PORT"], environ["NER_PORT"]))
+    intents = IntentService(None, "http://{}:{}/api/intent".format(environ["INTENT_HOST"], environ["INTENT_PORT"]))
+    ner = NERService(None, "http://{}:{}/api/ner".format(environ["NER_HOST"], environ["NER_PORT"]))
+    topic = TopicService(None, "http://{}:{}/api/topic".format(environ["TOPIC_HOST"], environ["TOPIC_PORT"]))
     
     async def main(loop=None):
-        recognize_controller = RecognizerController(recognizer)
+        recognize_controller = ResolverController(intents, ner, topic)
         
         application = Application(middlewares=[middleware.logging], logger=logger)
         application.router.add_post('/api/recognize', recognize_controller.post)

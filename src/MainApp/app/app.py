@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     middleware = ExceptionHandlerMiddleware(logger)
     db = DBProvider(MongoClient('0.0.0.0', 5002))
-    recognizer = RecognizerService(None, "http://{}:{}/recognize".format(environ["RECOGNIZER_PORT"], environ["RECOGNIZER_PORT"]))
+    recognizer = RecognizerService(None, "http://{}:{}/api/recognize".format(environ["RECOGNIZER_HOST"], environ["RECOGNIZER_PORT"]))
 
     async def main(loop=None):
         message_controller = MessageController(recognizer)

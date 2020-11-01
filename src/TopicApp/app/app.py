@@ -20,7 +20,7 @@ if __name__ == "__main__":
         ner_controller = TopicController(model)
         
         application = Application(middlewares=[middleware.logging], logger=logger)
-        application.router.add_post('/api/ner', ner_controller.post)
+        application.router.add_post('/api/topic', ner_controller.post)
 
         runner = AppRunner(application)
         await runner.setup()

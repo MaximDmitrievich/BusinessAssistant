@@ -10,7 +10,7 @@ class RecognizerService:
         headers= {'content-type': 'application/json'}
         if self.client_session is None:
             async with ClientSession() as session:
-                response: ClientResponse  = await session.post(url=self.url, json={ "query": str(text) }, headers=headers)
+                response: ClientResponse  = await session.post(url=self.url, json={ "text": str(text) }, headers=headers)
         else:
-            response: ClientResponse  = await self.client_session.post(url=self.url, json={ "query": str(text) }, headers=headers)
+            response: ClientResponse  = await self.client_session.post(url=self.url, json={ "text": str(text) }, headers=headers)
         return await response.json()
