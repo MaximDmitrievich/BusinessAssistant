@@ -1,0 +1,11 @@
+pandas
+aiohttp
+aiohttp_rest_api
+asyncio
+markdown==2.6.11
+geos
+shapely==1.6.4
+sentencepiece==0.1.83
+torch
+torchvision
+simpletransformers

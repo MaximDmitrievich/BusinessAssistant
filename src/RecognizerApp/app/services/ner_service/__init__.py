@@ -1,0 +1,1 @@
+from .ner_service import NERService

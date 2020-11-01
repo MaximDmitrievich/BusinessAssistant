@@ -1,0 +1,1 @@
+from .recognizer_service import RecognizerService

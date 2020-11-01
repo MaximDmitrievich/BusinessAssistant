@@ -1,0 +1,78 @@
+version: "3.8"
+
+services:
+  mainApp:
+    container_name: ba_mainapp_service
+    build: 
+      context: "./MainApp"
+      dockerfile: Dockerfile
+    image: ba_mainapp_service
+    ports:
+      - "5000:5000"
+    environment:
+      APP_NAME: "mainApp"
+      APP_INSTANCE_ENVIRONMENT: "dev"
+      APP_HOST: 0.0.0.0
+      APP_PORT: 5000
+      RECOGNIZER_HOST: recognizerApp
+      RECOGNIZER_PORT: 5001
+
+  recognizerApp:
+    container_name: ba_recognizerapp_service
+    build: 
+      context: "./RecognizerApp"
+      dockerfile: Dockerfile
+    image: ba_recognizerapp_service
+    ports:
+      - "5001:5001"
+    environment:
+      APP_NAME: "recognizerApp"
+      APP_INSTANCE_ENVIRONMENT: "dev"
+      APP_HOST: 0.0.0.0
+      APP_PORT: 5001
+      INTENT_HOST: intentApp
+      INTENT_PORT: 5003
+      NER_HOST: nerApp
+      NER_PORT: 5002
+
+  nerApp:
+    container_name: ba_nerapp_service
+    build: 
+      context: "./NerApp"
+      dockerfile: Dockerfile
+    image: ba_nerapp_service
+    ports:
+      - "5002:5002"
+    environment:
+      APP_NAME: "nerApp"
+      APP_INSTANCE_ENVIRONMENT: "dev"
+      APP_HOST: 0.0.0.0
+      APP_PORT: 5002
+
+  intentApp:
+    container_name: ba_intentapp_service
+    build: 
+      context: "./IntentApp"
+      dockerfile: Dockerfile
+    image: ba_intentapp_service
+    ports:
+      - "5003:5003"
+    environment:
+      APP_NAME: "intentApp"
+      APP_INSTANCE_ENVIRONMENT: "dev"
+      APP_HOST: 0.0.0.0
+      APP_PORT: 5003
+  
+  topicApp:
+    container_name: ba_topicapp_service
+    build: 
+      context: "./TopicApp"
+      dockerfile: Dockerfile
+    image: ba_topicapp_service
+    ports:
+      - "5004:5004"
+    environment:
+      APP_NAME: "topicApp"
+      APP_INSTANCE_ENVIRONMENT: "dev"
+      APP_HOST: 0.0.0.0
+      APP_PORT: 5004

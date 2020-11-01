@@ -1,0 +1,1 @@
+from .recognize_controller import ResolverController

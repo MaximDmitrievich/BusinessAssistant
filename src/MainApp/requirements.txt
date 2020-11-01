@@ -1,0 +1,4 @@
+aiohttp
+asyncio
+aiohttp_rest_api
+pymongo
